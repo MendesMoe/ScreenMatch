@@ -2,6 +2,8 @@ package br.com.screenmatch.controller;
 
 import br.com.screenmatch.model.movie.DataNewMovie;
 import br.com.screenmatch.model.movie.Movie;
+import br.com.screenmatch.model.movie.MovieRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +17,8 @@ import java.util.List;
 @RequestMapping("/movies")
 public class MovieController {
 
-    private List<Movie> movies = new ArrayList<>();
+    @Autowired //nao precisa criar uma instancia com um new, é o spring que faz isso com essa anotation
+    private MovieRepository repository;
     @GetMapping("/form")
     public String getPageForm() {
         return "movies/formMovie";
@@ -23,13 +26,13 @@ public class MovieController {
 
     @GetMapping()
     public String getPageList(Model model) {
-        model.addAttribute("listMovies", movies); //necessario para enviar variaveis para a view
+        model.addAttribute("listMovies", repository.findAll()); //necessario para enviar variaveis para a view
         return "movies/listMovies";
     }
     @PostMapping
     public String saveNewMovie(DataNewMovie data) {
         var movie = new Movie(data);
-        movies.add(movie);
+        repository.save(movie);
 
         return "redirect:/movies"; // ao inves de repetir as linhas 26 e 27, rediretiona
     }

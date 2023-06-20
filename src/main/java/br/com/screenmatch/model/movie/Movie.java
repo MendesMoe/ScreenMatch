@@ -1,6 +1,13 @@
 package br.com.screenmatch.model.movie;
 
+import jakarta.persistence.*;
+
+@Entity //importante para fazer o mapeamento da entidade
+@Table(name = "movies")
 public class Movie {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String name;
     private Integer duration;
     private Integer year;
@@ -13,6 +20,8 @@ public class Movie {
         this.genre = data.genre();
     }
 
+    public Movie(){}
+
     public String getName() {
         return name;
     }
@@ -24,6 +33,10 @@ public class Movie {
     }
     public String getGenre() {
         return genre;
+    }
+
+    public Long getId() {
+        return id;
     }
 
     @Override
