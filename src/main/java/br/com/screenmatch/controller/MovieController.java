@@ -23,7 +23,7 @@ public class MovieController {
 
     @GetMapping()
     public String getPageList(Model model) {
-        model.addAttribute("listMovies", movies);
+        model.addAttribute("listMovies", movies); //necessario para enviar variaveis para a view
         return "movies/listMovies";
     }
     @PostMapping
@@ -31,6 +31,6 @@ public class MovieController {
         var movie = new Movie(data);
         movies.add(movie);
 
-        return "movies/formMovie";
+        return "redirect:/movies"; // ao inves de repetir as linhas 26 e 27, rediretiona
     }
 }
