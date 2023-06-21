@@ -18,6 +18,7 @@
       <th>DURATION</th>
       <th>ANNE</th>
       <th>GENRE</th>
+      <th>ACTIONS</th>
     </tr>
     </thead>
     <tbody>
@@ -26,6 +27,15 @@
       <td th:text="${movie.duration}"></td>
       <td th:text="${movie.year}"></td>
       <td th:text="${movie.genre}"></td>
+      <td>
+        <a th:href="@{ /movies/form?id={id}(id=${movie.id}) }">Editer</a>
+
+        <form action="/movies" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="id" th:value="${movie.id}">
+          <input type="submit" value="Delete">
+        </form>
+      </td>
     </tr>
     </tbody>
   </table>

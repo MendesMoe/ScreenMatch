@@ -48,4 +48,11 @@ public class Movie {
                 ", genre='" + genre + '\'' +
                 '}';
     }
+
+    public void updateData(DataUpdateMovie data) {
+        this.name = data.name();
+        this.duration = data.duration();
+        this.year = data.year();
+        this.genre = data.genre();
+    }
 }
