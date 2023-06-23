@@ -11,7 +11,7 @@
 
     <form method="post" action="/movies">
         <input type="hidden" name="_method" value="put" th:if="${movie != null}">
-        <input type="hidden" name="id" value="${movie?.id}">
+        <input type="hidden" name="id" th:value="${movie?.id}">
 
         <div>
             <label for="name">Name :</label>
